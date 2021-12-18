@@ -6,55 +6,72 @@
 /*   By: agiraude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 15:32:20 by agiraude          #+#    #+#             */
-/*   Updated: 2021/12/17 18:00:02 by agiraude         ###   ########.fr       */
+/*   Updated: 2021/12/18 17:07:55 by agiraude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "pipex.h"
+#include "stdio.h"
 
-char	**parse_cmd(const char *cmd_str)
+int		run_child_1(int file_in, char *cmd_path, char **cmd_arg, int *pipefd)
 {
-	return (ft_split(cmd_str, ' '));
+	dup2(file_in, 0);
+	dup2(pipefd[1], 1);
+	close(pipefd[0]);
+	close(file_in);
+	execve(cmd_path, cmd_arg, 0);
+	exit(0);
 }
 
-char	***parse_arg(int argc, char **argv, char **file_in_out)
+int		run_child_2(int file_out, char *cmd_path, char **cmd_arg, int *pipefd)
 {
-	int	i;
-	int	ii;
-	char	***cmds;
+	dup2(file_out, 1);
+	dup2(pipefd[0], 0);
+	close(pipefd[1]);
+	close(file_out);
+	execve(cmd_path, cmd_arg, 0);
+	exit(0);
+}
 
-	file_in_out[0] = argv[1];
-	file_in_out[1] = argv[argc - 1];
-	cmds = (char ***)malloc(sizeof(char **) * argc - 2);
-	ii = 0;
-	i = 2;
-	while (i < argc - 1)
-		cmds[ii++] = parse_cmd(argv[i++]);
-	cmds[ii] = 0;
-	return (cmds);
-}	
-
-int	main(int argc, char **argv)
+void	pipex(int file_in, int file_out, char **argv, char **envp)
 {
-	pid_t	child_pid;
-	pid_t	wait_result;
-	int		stat_loc;
-	char	*file_in_out[2];
-	char	***cmds;
+	int	pipefd[2];
+	int	status;
+	char	**cmd_1;
+	char	**cmd_2;
+	pid_t	child_1;
+	pid_t	child_2;
 
-	if (argc < 5)
-		return (0);
-	cmds = parse_arg(argc, argv, file_in_out);
-	child_pid = fork();
-	if (child_pid == 0)
-	{
-		printf("### CHILD ###\nCurrent PID: %d and child_pid: %d\n", getpid(), child_pid);
-	}
-	else
-	{
-		wait_result = waitpid(child_pid, &stat_loc, WUNTRACED);
-		printf("### PARENT ###\nCurrent PID: %d and child_pid: %d\n", getpid(), child_pid);
-	}
+
+	cmd_1 = ft_split(argv[2], ' ');
+	cmd_2 = ft_split(argv[3], ' ');
+	pipe(pipefd);
+	child_1 = fork();
+	if (child_1 < 0)
+		return (perror("Fork: "));
+	if (child_1 == 0)
+		run_child_1(file_in, generate_path(envp, cmd_1[0]), cmd_1, pipefd);
+	child_2 = fork();
+	if (child_2 < 0)
+		return (perror("Fork: "));
+	if (child_2 == 0)
+		run_child_2(file_out, generate_path(envp, cmd_2[0]), cmd_2, pipefd);
+	close(pipefd[0]);
+	close(pipefd[1]);
+	waitpid(child_1, &status, 0);
+	waitpid(child_2, &status, 0);
+}
+
+int	main(int argc, char **argv, char **envp)
+{
+	int	file_in;
+	int	file_out;
+
+	file_in = open(argv[1], O_RDONLY);
+	file_out = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
+	if (file_in < 0 || file_out < 0)
+		return (-1);
+	pipex(file_in, file_out, argv, envp);
 	return (0);
 }

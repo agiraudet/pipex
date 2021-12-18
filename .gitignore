@@ -1,0 +1,6 @@
+test.txt
+srcs/*.o
+libft/srcs/*.o
+pipex
+libft/libft.a
+out.txt
