@@ -1,36 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agiraude <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/17 15:33:31 by agiraude          #+#    #+#             */
-/*   Updated: 2021/12/19 16:12:15 by agiraude         ###   ########.fr       */
+/*   Created: 2020/10/18 16:32:11 by agiraude          #+#    #+#             */
+/*   Updated: 2021/12/15 10:52:51 by agiraude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "../includes/libft.h"
 
-#include <fcntl.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-
-typedef struct	s_child
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	int		pid;
-	int		fd_in;
-	int		fd_out;
-	int		fd_in_close;
-	int		fd_out_close;
-	char	*cmd_path;
-	char	**cmd_arg;
-}	t_child;
+	size_t	i;
 
-char	*generate_path(char **envp, char *cmd);
-
-#endif
+	i = 0;
+	if (!n)
+		return (0);
+	while ((s1[i] && s1[i] == s2[i]) && i < n - 1)
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
