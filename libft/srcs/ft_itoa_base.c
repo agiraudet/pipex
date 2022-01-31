@@ -6,7 +6,7 @@
 /*   By: agiraude <agiraude@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 12:22:42 by agiraude          #+#    #+#             */
-/*   Updated: 2021/12/15 16:15:22 by agiraude         ###   ########.fr       */
+/*   Updated: 2020/12/10 17:18:06 by agiraude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,7 @@ static int	check_error(char *base, long baselen)
 	return (1);
 }
 
-static int	choose_sign(long nb)
-{
-	if (nb < 0)
-		return (-1);
-	else
-		return (1);
-}
-
-static long	ft_abs(long nb)
-{
-	if (nb < 0)
-		return (nb * -1);
-	else
-		return (nb);
-}
-
-char	*ft_itoa_base(long nb, char *base)
+char		*ft_itoa_base(long nb, char *base)
 {
 	char	tmp[100];
 	char	*ret;
@@ -61,8 +45,8 @@ char	*ft_itoa_base(long nb, char *base)
 	baselen = ft_strlen(base);
 	if (check_error(base, baselen) == 0)
 		return (0);
-	sign = choose_sign(nb);
-	nb = ft_abs(nb);
+	sign = (nb < 0) ? -1 : 1;
+	nb = (sign == -1) ? -nb : nb;
 	i = 0;
 	while (nb >= baselen)
 	{

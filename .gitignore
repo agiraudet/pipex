@@ -6,3 +6,4 @@ libft/srcs/*.o
 pipex
 libft/libft.a
 out.txt
+pipex-tester

@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ltrim.c                                         :+:      :+:    :+:   */
+/*   ft_lstlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agiraude <agiraude@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/15 14:52:03 by agiraude          #+#    #+#             */
-/*   Updated: 2021/02/15 15:20:58 by agiraude         ###   ########.fr       */
+/*   Created: 2022/01/25 15:33:40 by agiraude          #+#    #+#             */
+/*   Updated: 2022/01/26 10:37:27 by agiraude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
-char	*ft_ltrim(const char *s)
+size_t	ft_lstlen(t_list *lst)
 {
-	if (!s)
+	size_t	n;
+
+	if (!lst)
 		return (0);
-	while (ft_isspace(*s))
-		s++;
-	return (ft_strdup(s));
+	n = 1;
+	while (lst->next)
+	{
+		n++;
+		lst = lst->next;
+	}
+	return (n);
 }

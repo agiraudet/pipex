@@ -6,7 +6,7 @@
 /*   By: agiraude <agiraude@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 15:21:26 by agiraude          #+#    #+#             */
-/*   Updated: 2021/12/15 10:49:34 by agiraude         ###   ########.fr       */
+/*   Updated: 2020/11/17 19:02:47 by agiraude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,5 @@ char	*ft_strchr(const char *s, int c)
 		s++;
 	if (*s != c)
 		s = 0;
-	return ((char *)s);
+	return ((char*)s);
 }

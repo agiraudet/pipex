@@ -6,7 +6,7 @@
 /*   By: agiraude <agiraude@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 12:15:32 by agiraude          #+#    #+#             */
-/*   Updated: 2021/12/17 12:53:33 by agiraude         ###   ########.fr       */
+/*   Updated: 2022/01/25 15:36:01 by agiraude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 # include <unistd.h>
 # include <stdarg.h>
 
-typedef struct s_list
+typedef struct		s_list
 {
 	void			*content;
 	struct s_list	*next;
-}	t_list;
+}					t_list;
 
 void				*ft_memset(void *s, int c, size_t n);
 void				ft_bzero(void *s, size_t n);
@@ -52,9 +52,8 @@ int					ft_strcmp(const char *s1, const char *s2);
 size_t				ft_strlcpy(char *dst, const char *src, size_t size);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);
 char				*ft_strnstr(const char *big, const char *little,
-						size_t len);
+								size_t len);
 int					ft_atoi(const char *nptr);
-long				ft_atol(const char *nptr);
 void				*ft_calloc(size_t nmemb, size_t size);
 char				*ft_strdup(const char *s);
 char				*ft_revstr(char *str);
@@ -79,6 +78,7 @@ void				ft_putnbr_fd(int n, int fd);
 void				ft_putnbr(int n);
 
 t_list				*ft_lstnew(void *content);
+size_t				ft_lstlen(t_list *lst);
 void				ft_lstadd_front(t_list **alst, t_list *new);
 int					ft_lstsize(t_list *lst);
 t_list				*ft_lstlast(t_list *lst);
@@ -87,11 +87,11 @@ void				ft_lstdelone(t_list *lst, void (*del)(void *));
 void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
-						void (*del)(void *));
+								void (*del)(void *));
 t_list				*ft_lstpop_front(t_list **lst);
 t_list				*ft_lstpop_back(t_list **lst);
 t_list				*ft_lstpop_srch(t_list **lst,
-						int (*f)(void *, void *), void *data);
+									int (*f)(void *, void *), void *data);
 void				ft_lstswap(t_list *prev, t_list *a);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: agiraude <agiraude@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/04 10:43:09 by agiraude          #+#    #+#              #
-#    Updated: 2021/12/18 16:46:51 by agiraude         ###   ########.fr        #
+#    Updated: 2022/02/01 00:11:52 by agiraude         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,9 @@ INC_DIR		=	-I includes/ -I $(LIBFT_DIR)includes/
 
 SRCS_DIR	=	srcs/
 
-SRCS_FILES	=	path.c \
+SRCS_FILES	=	cmd.c \
+				main.c \
+				parse.c \
 				pipex.c
 
 SRCS		=	$(addprefix $(SRCS_DIR), $(SRCS_FILES))
@@ -44,7 +46,7 @@ $(LIBFT):
 				make -C $(LIBFT_DIR)
 
 $(NAME):		$(OBJS) $(LIBFT) $(PUSH_O)
-				$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(PUSH_O) -L $(LIBFT_DIR) $(DEP) $(INC_DIR)
+				$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L $(LIBFT_DIR) $(DEP) $(INC_DIR)
 
 clean:
 				$(RM) $(OBJS)

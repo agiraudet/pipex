@@ -6,7 +6,7 @@
 /*   By: agiraude <agiraude@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 03:07:40 by agiraude          #+#    #+#             */
-/*   Updated: 2021/12/15 16:14:58 by agiraude         ###   ########.fr       */
+/*   Updated: 2021/02/15 14:35:59 by agiraude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,28 +41,17 @@ static char	**destroy_ret(char **ret, int i)
 	return (0);
 }
 
-static char	**init_split(const char *str, const char *sep, int *i)
-{
-	char	**ret;
-
-	if (!str)
-		return (0);
-	ret = malloc(sizeof(char *) * (count_str(str, sep) + 1));
-	if (!ret)
-		return (0);
-	*i = 0;
-	return (ret);
-}
-
-char	**ft_nsplit(const char *str, const char *sep)
+char		**ft_nsplit(const char *str, const char *sep)
 {
 	char	**ret;
 	int		len;
 	int		i;
 
-	ret = init_split(str, sep, &i);
-	if (!ret)
+	if (!str)
 		return (0);
+	if (!(ret = malloc(sizeof(char*) * (count_str(str, sep) + 1))))
+		return (0);
+	i = 0;
 	while (*str)
 	{
 		while (*str && ft_getindex(sep, *str) != -1)
@@ -72,10 +61,8 @@ char	**ft_nsplit(const char *str, const char *sep)
 			len = 0;
 			while (str[len] && ft_getindex(sep, str[len]) == -1)
 				len++;
-			ret[i] = ft_substr(str, 0, len);
-			if (!ret[i])
-				return (destroy_ret(ret, i + 1));
-			i++;
+			if (!(ret[i++] = ft_substr(str, 0, len)))
+				return (destroy_ret(ret, i));
 			str += len;
 		}
 	}

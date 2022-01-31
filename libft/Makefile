@@ -6,14 +6,13 @@
 #    By: agiraude <agiraude@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/12 15:46:26 by agiraude          #+#    #+#              #
-#    Updated: 2021/12/15 10:31:18 by agiraude         ###   ########.fr        #
+#    Updated: 2022/01/30 16:32:59 by agiraude         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS_FOLDER	=	srcs/
 
 SRCS_FILES	=	ft_atoi.c \
-				ft_atol.c \
 				ft_bzero.c \
 				ft_calloc.c \
 				ft_isalnum.c \
@@ -58,6 +57,7 @@ SRCS_FILES	=	ft_atoi.c \
 				ft_toupper.c \
 				ft_revstr.c \
 				ft_putstr.c \
+				ft_lstlen.c \
 				ft_lstpop_front.c \
 				ft_lstadd_back.c \
 				ft_lstadd_front.c \
@@ -88,7 +88,7 @@ INC			=	-I includes/
 
 OBJS		= 	$(SRCS:.c=.o)
 
-CC			=	gcc
+CC			=	clang
 
 CFLAGS		=	-Wall -Wextra -Werror
 

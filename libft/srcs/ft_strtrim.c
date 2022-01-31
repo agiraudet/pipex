@@ -6,13 +6,13 @@
 /*   By: agiraude <agiraude@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 12:52:08 by agiraude          #+#    #+#             */
-/*   Updated: 2021/12/15 10:54:50 by agiraude         ###   ########.fr       */
+/*   Updated: 2021/02/16 16:01:13 by agiraude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-static int	ft_inset(const char c, const char *set)
+static int		ft_inset(const char c, const char *set)
 {
 	while (*set)
 		if (c == *set++)
@@ -43,7 +43,7 @@ static size_t	ft_countch(const char *s1, const char *set)
 	return (count);
 }
 
-char	*ft_strtrim(char const *s1, char const *set)
+char			*ft_strtrim(char const *s1, char const *set)
 {
 	char	*ret;
 	size_t	size;
@@ -52,7 +52,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	if (!s1 || !set)
 		return (0);
 	size = ft_countch(s1, set);
-	ret = (char *)malloc(sizeof(char) * (size + 1));
+	ret = (char*)malloc(sizeof(char) * (size + 1));
 	if (!ret)
 		return (0);
 	while (ft_inset(*s1, set))
