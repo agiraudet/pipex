@@ -6,7 +6,7 @@
 /*   By: agiraude <agiraude@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 15:06:13 by agiraude          #+#    #+#             */
-/*   Updated: 2022/01/31 18:16:06 by agiraude         ###   ########.fr       */
+/*   Updated: 2022/02/09 11:43:01 by agiraude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,9 @@ t_cmd	*cmd_create(const char *cmd_line, char **envp)
 	cmd->argv = ft_split(cmd_line, ' ');
 	cmd->envp = envp;
 	cmd->path = path_for_cmd(cmd->argv[0], envp);
+	cmd->pid = 0;
 	if (cmd->path[0] != '.'
-			&& ft_strchr(cmd->path, '/') == 0 && access(cmd->path, X_OK) != 0)
+		&& ft_strchr(cmd->path, '/') == 0 && access(cmd->path, X_OK) != 0)
 	{
 		ft_putstr_fd(cmd->path, 2);
 		ft_putendl_fd(":command not found", 2);

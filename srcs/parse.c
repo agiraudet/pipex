@@ -6,7 +6,7 @@
 /*   By: agiraude <agiraude@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 13:31:53 by agiraude          #+#    #+#             */
-/*   Updated: 2022/01/23 14:19:01 by agiraude         ###   ########.fr       */
+/*   Updated: 2022/02/09 11:38:12 by agiraude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	strlst_free(char **strlst)
 	int	i;
 
 	i = 0;
-	while(strlst[i])
+	while (strlst[i])
 		free(strlst[i++]);
 	free(strlst);
 }
